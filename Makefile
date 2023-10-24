@@ -10,7 +10,7 @@ help:                           ## Display this help message
 	@echo "ENABLE_DBAAS=1 NETWORK=minikube make env-up"
 
 
-gen: clean                      ## Generate files
+gen:                            ## Generate files
 	go generate ./...
 
 
