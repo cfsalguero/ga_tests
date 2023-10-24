@@ -45,6 +45,5 @@ FILES = $(shell find . -type f -name '*.go')
 format:               ## Format source code
 	bin/gofumpt -l -w $(FILES)
 	bin/goimports -local github.com/percona/pmm -l -w $(FILES)
-	bin/gci write --section Standard --section Default --section "Prefix(github.com/percona/pmm)" $(FILES)
-	bin/buf format api -w
+	bin/gci write --section Standard --section Default --section "Prefix(github.com/cfsalguero/ga_tests)" $(FILES)
 
