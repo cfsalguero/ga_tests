@@ -18,6 +18,9 @@ TEST_FLAGS ?= -timeout=180s
 TEST_RUN_UPDATE ?= 0
 TEST_FILES ?= ./...
 
+build:
+	go build cmd/main.go
+
 test:                           ## Run tests
 	go test $(TEST_FLAGS) -p 1 -race $(TEST_FILES)
 

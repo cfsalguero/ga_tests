@@ -56,7 +56,7 @@ jobs:
         run: make gen
 
       - name: Check build
-        run: make release
+        run: make build
 
       - name: Check files are formatted and no source code changes
         run: |
