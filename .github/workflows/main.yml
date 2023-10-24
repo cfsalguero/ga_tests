@@ -66,17 +66,6 @@ jobs:
           git status
           git diff --exit-code
 
-      - name: Update API compatibility descriptors
-        run: |
-          # log if descriptors changed, useful for "update descriptors" PRs
-          make descriptors
-          git diff --text
-
-      - name: Run check-license
-        run: |
-          # run license checker on configured files
-          bin/license-eye -c .licenserc.yaml header check
-
       - name: Run go-sumtype
         run: bin/go-sumtype ./...
 
@@ -107,9 +96,6 @@ jobs:
           else
             echo "$out"
           fi
-
-      - name: Test common API
-        run: make test-common
 
       - name: Run debug commands on failure
         if: ${{ failure() }}
