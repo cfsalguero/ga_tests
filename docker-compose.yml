@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  database:
+    image: postgres:15.3-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - '5432:5432'
+
+  localstack:
+    image: localstack/localstack
+    container_name: localstack
+    ports:
+      - '4566:4566' # LocalStack endpoint
+      - '4510-4559:4510-4559' # external services port range
+    environment:
+      - AWS_DEFAULT_REGION=us-east-2
+      - AWS_ACCESS_KEY_ID=localstackAccessKeyId
+      - AWS_SECRET_ACCESS_KEY=localstackSecretAccessKey
+      - SERVICES=lambda
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - DYNAMODB_SHARE_DB=1
+      - LAMBDA_DOCKER_NETWORK = host
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
