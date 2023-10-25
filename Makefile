@@ -10,17 +10,40 @@ help:                           ## Display this help message
 	@echo "ENABLE_DBAAS=1 NETWORK=minikube make env-up"
 
 
-gen: clean                      ## Generate files
+gen:                            ## Generate files
 	go generate ./...
 
 
-PMM_TEST_FLAGS ?= -timeout=180s
-PMM_TEST_RUN_UPDATE ?= 0
-PMM_TEST_FILES ?= ./...
+TEST_FLAGS ?= -timeout=180s
+TEST_RUN_UPDATE ?= 0
+TEST_FILES ?= ./...
+
+build:
+	go build cmd/main.go
 
 test:                           ## Run tests
-	go test $(PMM_TEST_FLAGS) -p 1 -race $(PMM_TEST_FILES)
+	go test $(TEST_FLAGS) -p 1 -race $(TEST_FILES)
 
 test-cover:                     ## Run tests and collect per-package coverage information
-	go test $(PMM_TEST_FLAGS) -p 1 -race -coverprofile=cover.out -covermode=atomic -coverpkg=$(PMM_TEST_FILES) $(PMM_TEST_FILES)
+	go test $(TEST_FLAGS) -p 1 -race -coverprofile=cover.out -covermode=atomic -coverpkg=$(TEST_FILES) $(TEST_FILES)
+
+init:                 ## Install tools
+	rm -rf bin/*
+	cd tools && go generate -x -tags=tools
+
+	# Install golangci-lint
+	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b ./bin v1.51.2 # Version should match specified in CI
+
+check-license:          ## Run license header checks against source files
+	bin/license-eye -c .licenserc.yaml header check
+
+check-all: check-license check    ## Run golangci linter to check for changes against main
+	bin/golangci-lint run -c=.golangci.yml --new-from-rev=main
+
+FILES = $(shell find . -type f -name '*.go')
+
+format:               ## Format source code
+	bin/gofumpt -l -w $(FILES)
+	bin/goimports -local github.com/percona/pmm -l -w $(FILES)
+	bin/gci write --section Standard --section Default --section "Prefix(github.com/cfsalguero/ga_tests)" $(FILES)
 
