@@ -64,6 +64,18 @@ jobs:
       - name: Check build
         run: make build
 
+      - name: Run tests
+        run: make test-cover
+
+      - name: Update coverage report
+        uses: ncruces/go-coverage-report@v0
+        with:
+          coverage-file: cover.out
+          report: true
+          chart: true
+          amend: true
+          reuse-go: true
+
       - name: Check files are formatted and no source code changes
         run: |
           make format
