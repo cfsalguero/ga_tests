@@ -21,5 +21,5 @@ func fna(i int) (int, error) {
 		return 0, fmt.Errorf("negative numbers are not allowed")
 	}
 
-	return i + 2, nil
+	return i + 4, nil
 }
