@@ -153,9 +153,9 @@ jobs:
       SLACK_TITLE: "Finished ${{ github.event.repository.name }} workflow"
       SLACK_MESSAGE: "${{ github.event.inputs.repo || github.repository }}:${{ github.event.inputs.branch || github.head_ref }}"
 
-#    steps:
-#      - name: Slack Notification
-#        uses: rtCamp/action-slack-notify@v2
+    steps:
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
 
   workflow_failure:
     if: ${{ failure() }}
@@ -171,6 +171,6 @@ jobs:
       SLACK_TITLE: "Finished ${{ github.event.repository.name }} workflow"
       SLACK_MESSAGE: "Workflow failed: ${{ github.event.inputs.repo || github.repository }}:${{ github.event.inputs.branch || github.head_ref }}"
 
-#    steps:
-#      - name: Slack Notification
-#        uses: rtCamp/action-slack-notify@v2
+    steps:
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
