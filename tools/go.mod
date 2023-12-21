@@ -10,7 +10,7 @@ require (
 	github.com/quasilyte/go-consistent v0.6.0
 	github.com/reviewdog/reviewdog v0.15.0
 	github.com/vburenin/ifacemaker v1.2.1
-	github.com/vektra/mockery/v2 v2.36.0
+	github.com/vektra/mockery/v2 v2.39.1
 	golang.org/x/tools v0.14.0
 	mvdan.cc/gofumpt v0.5.0
 )
@@ -22,7 +22,7 @@ require (
 	cloud.google.com/go/datastore v1.14.0 // indirect
 	github.com/ProtonMail/go-crypto v0.0.0-20230717121422-5aa5874ade95 // indirect
 	github.com/bradleyfalzon/ghinstallation/v2 v2.6.0 // indirect
-	github.com/chigopher/pathlib v0.15.0 // indirect
+	github.com/chigopher/pathlib v0.19.1 // indirect
 	github.com/cloudflare/circl v1.3.3 // indirect
 	github.com/fatih/color v1.15.0 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
